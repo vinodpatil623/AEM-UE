@@ -23,7 +23,7 @@ async function applyChanges(event) {
     || detail?.request?.to?.container?.resource; // move in sections
   if (!resource) return false;
   const updates = detail?.response?.updates;
-  if (!updates.length) return false;
+  if (!Array.isArray(updates) || !updates.length) return false;
   const { content } = updates[0];
   if (!content) return false;
 
@@ -107,7 +107,7 @@ function attachEventListeners(main) {
     'aue:content-copy',
   ].forEach((eventType) => main?.addEventListener(eventType, async (event) => {
     event.stopPropagation();
-    promiseChanges$ = applyChanges(event);
+    promiseChanges$ = applyChanges(event).catch(() => false);
     const applied = await promiseChanges$;
     if (!applied) window.location.reload();
   }));

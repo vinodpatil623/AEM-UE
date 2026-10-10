@@ -33,6 +33,18 @@
             {
               "name": "Highlight",
               "value": "highlight"
+            },
+            {
+              "name": "Brand Green",
+              "value": "brand"
+            },
+            {
+              "name": "Quiet Background",
+              "value": "quiet"
+            },
+            {
+              "name": "Compact Spacing",
+              "value": "compact"
             }
           ]
         }
@@ -50,7 +62,8 @@
         "hero",
         "cards",
         "columns",
-        "fragment"
+        "fragment",
+        "faq"
       ]
     }
   ]

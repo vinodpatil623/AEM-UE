@@ -12,45 +12,63 @@
 
 :root {
   /* colors */
-  --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  --green: #006b36;
+  --green-dark: #004b29;
+  --red: #d71920;
+  --surface: #f3f6f3;
+  --border-color: #d5dfd8;
+  --focus-color: #ad151b;
+  --container-width: 1200px;
+  --space-xs: 8px;
+  --space-s: 16px;
+  --space-m: 24px;
+  --space-l: 40px;
+  --space-xl: 64px;
+  --gutter: 24px;
+  --background-color: #fff;
+  --light-color: var(--surface);
+  --dark-color: #454d48;
+  --text-color: #202923;
+  --link-color: var(--green);
+  --link-hover-color: var(--green-dark);
 
   /* fonts */
-  --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  --body-font-family: 'Trebuchet MS', 'Gill Sans', sans-serif;
+  --heading-font-family: georgia, 'Times New Roman', serif;
 
   /* body sizes */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 19px;
-  --body-font-size-xs: 17px;
+  --body-font-size-m: 18px;
+  --body-font-size-s: 16px;
+  --body-font-size-xs: 14px;
 
   /* heading sizes */
-  --heading-font-size-xxl: 55px;
-  --heading-font-size-xl: 44px;
-  --heading-font-size-l: 34px;
-  --heading-font-size-m: 27px;
-  --heading-font-size-s: 24px;
-  --heading-font-size-xs: 22px;
+  --heading-font-size-xxl: 40px;
+  --heading-font-size-xl: 32px;
+  --heading-font-size-l: 26px;
+  --heading-font-size-m: 23px;
+  --heading-font-size-s: 20px;
+  --heading-font-size-xs: 18px;
 
   /* nav height */
-  --nav-height: 64px;
+  --nav-height: 80px;
 }
 
-/* fallback fonts */
-@font-face {
-  font-family: roboto-condensed-fallback;
-  size-adjust: 88.82%;
-  src: local('Arial');
+* {
+  box-sizing: border-box;
 }
 
-@font-face {
-  font-family: roboto-fallback;
-  size-adjust: 99.529%;
-  src: local('Arial');
+html {
+  scroll-padding-top: calc(var(--nav-height) + 24px);
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus-color);
+  outline-offset: 4px;
+}
+
+::selection {
+  background: var(--green-dark);
+  color: #fff;
 }
 
 @media (width >= 900px) {
@@ -61,12 +79,11 @@
     --body-font-size-xs: 14px;
 
     /* heading sizes */
-    --heading-font-size-xxl: 45px;
-    --heading-font-size-xl: 36px;
-    --heading-font-size-l: 28px;
-    --heading-font-size-m: 22px;
-    --heading-font-size-s: 20px;
-    --heading-font-size-xs: 18px;
+    --heading-font-size-xxl: 60px;
+    --heading-font-size-xl: 44px;
+    --heading-font-size-l: 32px;
+    --heading-font-size-m: 26px;
+    --gutter: 32px;
   }
 }
 
@@ -78,6 +95,8 @@ body {
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
   line-height: 1.6;
+  overflow-wrap: anywhere;
+  letter-spacing: 0;
 }
 
 body.appear {
@@ -107,9 +126,9 @@ h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
-  font-weight: 600;
-  line-height: 1.25;
-  scroll-margin: 40px;
+  font-weight: 400;
+  line-height: 1.15;
+  scroll-margin: calc(var(--nav-height) + 24px);
 }
 
 h1 { font-size: var(--heading-font-size-xxl); }
@@ -136,7 +155,7 @@ pre {
 
 pre {
   padding: 16px;
-  border-radius: 8px;
+  border-radius: 4px;
   background-color: var(--light-color);
   overflow-x: auto;
   white-space: pre;
@@ -156,7 +175,8 @@ button {
 /* links */
 a:any-link {
   color: var(--link-color);
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
   overflow-wrap: break-word;
 }
 
@@ -176,19 +196,19 @@ button.button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: 44px;
   max-width: 100%;
   margin: 0;
   border: 2px solid transparent;
-  border-radius: 2.4em;
-  padding: 0.5em 1.2em;
+  border-radius: 4px;
+  padding: 12px 24px;
   font: inherit;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1.25;
   text-decoration: none;
   cursor: pointer;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  text-align: center;
+  white-space: normal;
 }
 
 a.button[aria-disabled="true"],
@@ -199,8 +219,8 @@ button.button:disabled {
 
 a.button.primary,
 button.button.primary {
-  border-color: var(--text-color);
-  background-color: var(--text-color);
+  border-color: var(--green);
+  background-color: var(--green);
   color: var(--background-color);
 }
 
@@ -208,8 +228,8 @@ a.button.primary:hover,
 a.button.primary:focus-visible,
 button.button.primary:hover,
 button.button.primary:focus-visible {
-  border-color: var(--dark-color);
-  background-color: var(--dark-color);
+  border-color: var(--green-dark);
+  background-color: var(--green-dark);
   color: var(--light-color);
 }
 
@@ -226,9 +246,9 @@ button.button.primary:disabled:focus-visible {
 
 a.button.secondary,
 button.button.secondary {
-  border-color: var(--text-color);
+  border-color: var(--green);
   background-color: transparent;
-  color: var(--text-color);
+  color: var(--green);
 }
 
 a.button.secondary:hover,
@@ -254,8 +274,8 @@ button.button.secondary:disabled:focus-visible {
 /* high-impact call-to-action */
 a.button.accent,
 button.button.accent {
-  border-color: var(--link-color);
-  background-color: var(--link-color);
+  border-color: var(--red);
+  background-color: var(--red);
   color: var(--background-color);
 }
 
@@ -263,8 +283,8 @@ a.button.accent:hover,
 a.button.accent:focus-visible,
 button.button.accent:hover,
 button.button.accent:focus-visible {
-  border-color: var(--link-hover-color);
-  background-color: var(--link-hover-color);
+  border-color: var(--focus-color);
+  background-color: var(--focus-color);
 }
 
 a.button.accent[aria-disabled="true"],
@@ -297,13 +317,14 @@ main img {
 
 /* sections */
 main > .section {
-  margin: 40px 0;
+  margin: var(--space-xl) 0;
 }
 
 main > .section > div {
-  max-width: 1200px;
+  max-width: var(--container-width);
   margin: auto;
-  padding: 0 24px;
+  padding: 0 var(--gutter);
+  min-width: 0;
 }
 
 main > .section:first-of-type {
@@ -312,7 +333,7 @@ main > .section:first-of-type {
 
 @media (width >= 900px) {
   main > .section > div {
-    padding: 0 32px;
+    padding: 0 var(--gutter);
   }
 }
 
@@ -321,5 +342,82 @@ main .section.light,
 main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
-  padding: 40px 0;
+  padding: var(--space-xl) 0;
+}
+
+main .section.quiet {
+  background-color: var(--surface);
+  margin: 0;
+  padding-block: var(--space-xl);
+}
+
+main .section.brand {
+  background-color: var(--green-dark);
+  color: #fff;
+  margin: 0;
+  padding-block: var(--space-xl);
+}
+
+main .section.brand a:any-link {
+  color: #fff;
+}
+
+main .section.brand .button.primary {
+  background-color: #fff;
+  border-color: #fff;
+  color: var(--green-dark);
+}
+
+main .section.brand .button.secondary {
+  border-color: #fff;
+  color: #fff;
+}
+
+main .section.brand :focus-visible {
+  outline-color: #fff;
+}
+
+main .section.brand .cards {
+  color: var(--text-color);
+}
+
+main .section.brand .cards a:any-link {
+  color: var(--link-color);
+}
+
+main .section.brand .cards .button.primary {
+  background-color: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+
+main .section.brand .cards :focus-visible {
+  outline-color: var(--focus-color);
+}
+
+main .section.brand .faq summary::after {
+  color: #fff;
+}
+
+main .section.compact {
+  margin-block: var(--space-l);
+}
+
+main .section.compact:is(.brand, .quiet, .highlight) {
+  margin-block: 0;
+  padding-block: var(--space-l);
+}
+
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 16px;
+  z-index: 20;
+  padding: 12px 20px;
+  background-color: #fff;
+  border: 2px solid var(--green-dark);
+}
+
+.skip-link:focus {
+  top: 16px;
 }

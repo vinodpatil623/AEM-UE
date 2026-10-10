@@ -1,1 +1,37 @@
-/* add global styles that can be loaded post LCP here */
+main .default-content-wrapper blockquote {
+	margin: 32px 0;
+	padding: 8px 0 8px 24px;
+	border-left: 3px solid var(--green);
+	font-family: var(--heading-font-family);
+	font-size: var(--heading-font-size-m);
+	line-height: 1.4;
+}
+
+main .default-content-wrapper hr {
+	margin: 40px 0;
+	border: 0;
+	border-top: 1px solid var(--border-color);
+}
+
+main .default-content-wrapper li + li {
+	margin-top: 8px;
+}
+
+main .default-content-wrapper > :first-child {
+	margin-top: 0;
+}
+
+main .default-content-wrapper > :last-child {
+	margin-bottom: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		scroll-behavior: auto !important;
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}
