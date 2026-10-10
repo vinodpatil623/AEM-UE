@@ -1,0 +1,50 @@
+.faq {
+  max-width: 860px;
+  margin-inline: auto;
+}
+
+.faq details {
+  border-top: 1px solid var(--border-color);
+}
+
+.faq details:last-child {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 64px;
+  padding: 20px 0;
+  font-size: var(--body-font-size-m);
+  font-weight: 700;
+  list-style: none;
+  cursor: pointer;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::after {
+  content: '+';
+  flex: 0 0 24px;
+  color: var(--link-color);
+  font-size: 28px;
+  text-align: center;
+}
+
+.faq details[open] summary::after {
+  content: '-';
+}
+
+.faq .faq-answer {
+  padding: 0 0 28px;
+  max-width: 72ch;
+}
+
+.faq .faq-answer > :first-child {
+  margin-top: 0;
+}
