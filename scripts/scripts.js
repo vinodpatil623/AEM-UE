@@ -46,18 +46,6 @@ export function moveInstrumentation(from, to) {
 }
 
 /**
- * load fonts.css and set a session storage flag
- */
-async function loadFonts() {
-  await loadCSS(`${window.hlx.codeBasePath}/styles/fonts.css`);
-  try {
-    if (!window.location.hostname.includes('localhost')) sessionStorage.setItem('fonts-loaded', 'true');
-  } catch (e) {
-    // do nothing
-  }
-}
-
-/**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
@@ -131,18 +119,17 @@ async function loadEager(doc) {
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
+    if (!main.id) main.id = 'main-content';
+    if (!main.hasAttribute('tabindex')) main.setAttribute('tabindex', '-1');
+    const skipLink = document.createElement('a');
+    skipLink.className = 'skip-link';
+    skipLink.href = `#${main.id}`;
+    skipLink.textContent = 'Skip to content';
+    doc.body.prepend(skipLink);
     decorateMain(main);
     document.body.classList.add('appear');
-    await loadSection(main.querySelector('.section'), waitForFirstImage);
-  }
-
-  try {
-    /* if desktop (proxy for fast connection) or fonts already loaded, load fonts.css */
-    if (window.innerWidth >= 900 || sessionStorage.getItem('fonts-loaded')) {
-      loadFonts();
-    }
-  } catch (e) {
-    // do nothing
+    const firstSection = main.querySelector('.section');
+    if (firstSection) await loadSection(firstSection, waitForFirstImage);
   }
 }
 
@@ -151,19 +138,20 @@ async function loadEager(doc) {
  * @param {Element} doc The container element
  */
 async function loadLazy(doc) {
-  loadHeader(doc.querySelector('header'));
+  const header = doc.querySelector('header');
+  if (header) loadHeader(header);
 
   const main = doc.querySelector('main');
-  await loadSections(main);
+  if (main) await loadSections(main);
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
 
-  loadFooter(doc.querySelector('footer'));
+  const footer = doc.querySelector('footer');
+  if (footer) loadFooter(footer);
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
-  loadFonts();
 }
 
 /**
