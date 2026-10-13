@@ -51,6 +51,9 @@
         "cards",
         "columns",
         "stats",
+        "asset-search",
+        "asset-grid",
+        "faq",
         "fragment"
       ]
     }

@@ -118,6 +118,11 @@ export default async function decorate(block) {
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
   const fragment = await loadFragment(navPath);
 
+  if (!fragment) {
+    block.textContent = '';
+    return;
+  }
+
   // decorate nav DOM
   block.textContent = '';
   const nav = document.createElement('nav');
@@ -131,7 +136,7 @@ export default async function decorate(block) {
   });
 
   const navBrand = nav.querySelector('.nav-brand');
-  const brandLink = navBrand.querySelector('.button');
+  const brandLink = navBrand?.querySelector('.button');
   if (brandLink) {
     brandLink.className = '';
     brandLink.closest('.button-container').className = '';
@@ -150,6 +155,15 @@ export default async function decorate(block) {
       });
     });
   }
+
+  nav.querySelectorAll('a[href]').forEach((link) => {
+    const linkPath = new URL(link.href, window.location).pathname.replace(/\.html$/, '') || '/';
+    const currentPath = window.location.pathname.replace(/\.html$/, '') || '/';
+    if (linkPath === currentPath) {
+      link.classList.add('active');
+      link.setAttribute('aria-current', 'page');
+    }
+  });
 
   // hamburger for mobile
   const hamburger = document.createElement('div');

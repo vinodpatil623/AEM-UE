@@ -1,4 +1,6 @@
 import {
+  buildBlock,
+  decorateBlock,
   loadHeader,
   loadFooter,
   decorateIcons,
@@ -9,7 +11,33 @@ import {
   loadSection,
   loadSections,
   loadCSS,
+  loadBlock,
 } from './aem.js';
+
+/**
+ * Creates the global sidebar shell before page decoration to avoid layout shift.
+ * The authored sidebar fragment is loaded during the lazy phase.
+ * @param {Document} doc The current document
+ */
+function buildSidebarShell(doc) {
+  const main = doc.querySelector('main');
+  if (!main || doc.querySelector('.site-sidebar')) return;
+
+  const aside = doc.createElement('aside');
+  aside.id = 'site-sidebar';
+  aside.className = 'site-sidebar';
+  aside.setAttribute('aria-label', 'Workspace navigation');
+
+  const sidebarBlock = buildBlock('sidebar', '');
+  aside.append(sidebarBlock);
+  decorateBlock(sidebarBlock);
+  main.before(aside);
+}
+
+async function loadSidebar(doc) {
+  const sidebarBlock = doc.querySelector('.site-sidebar .sidebar');
+  if (sidebarBlock) await loadBlock(sidebarBlock);
+}
 
 /**
  * Moves all the attributes from a given elmenet to another given element.
@@ -129,6 +157,7 @@ export function decorateMain(main) {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
+  buildSidebarShell(doc);
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
@@ -152,6 +181,7 @@ async function loadEager(doc) {
  */
 async function loadLazy(doc) {
   loadHeader(doc.querySelector('header'));
+  loadSidebar(doc);
 
   const main = doc.querySelector('main');
   await loadSections(main);

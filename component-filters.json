@@ -16,7 +16,16 @@
       "cards",
       "columns",
       "stats",
+      "asset-search",
+      "asset-grid",
+      "faq",
       "fragment"
+    ]
+  },
+  {
+    "id": "asset-grid",
+    "components": [
+      "asset-card"
     ]
   },
   {
@@ -38,6 +47,12 @@
       "image",
       "button",
       "title"
+    ]
+  },
+  {
+    "id": "faq",
+    "components": [
+      "faq-item"
     ]
   },
   {

@@ -2,8 +2,10 @@
 header .nav-wrapper {
   background-color: var(--background-color);
   width: 100%;
-  z-index: 2;
+  z-index: 30;
   position: fixed;
+  border-bottom: 1px solid var(--shell-border-color);
+  box-shadow: 0 1px 8px rgb(15 23 42 / 8%);
 }
 
 header nav {
@@ -15,7 +17,7 @@ header nav {
   align-items: center;
   gap: 0 24px;
   margin: auto;
-  max-width: 1248px;
+  max-width: none;
   height: var(--nav-height);
   padding: 0 24px;
   font-family: var(--body-font-family);
@@ -32,14 +34,14 @@ header nav[aria-expanded='true'] {
 
 @media (width >= 900px) {
   header .nav-wrapper {
-    position: relative;
+    position: fixed;
   }
 
   header nav {
     display: flex;
     justify-content: space-between;
     gap: 0 32px;
-    max-width: 1264px;
+    max-width: none;
     padding: 0 32px;
   }
 
@@ -56,6 +58,11 @@ header nav p {
 
 header nav a:any-link {
   color: currentcolor;
+}
+
+header nav a.active {
+  color: var(--link-color);
+  font-weight: 700;
 }
 
 /* hamburger */

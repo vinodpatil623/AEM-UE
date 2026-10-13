@@ -1,0 +1,24 @@
+.asset-search .asset-search-form {
+  display: flex;
+  gap: 8px;
+  max-width: 720px;
+}
+
+.asset-search input {
+  min-width: 0;
+  flex: 1;
+  border: 1px solid var(--shell-border-color);
+  border-radius: 10px;
+  padding: 12px 16px;
+  background: var(--background-color);
+}
+
+.asset-search button {
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 20px;
+  background: var(--link-color);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
