@@ -181,10 +181,10 @@ async function loadEager(doc) {
  */
 async function loadLazy(doc) {
   loadHeader(doc.querySelector('header'));
-  loadSidebar(doc);
 
   const main = doc.querySelector('main');
   await loadSections(main);
+  await loadSidebar(doc);
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
