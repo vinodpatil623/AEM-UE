@@ -1,7 +1,7 @@
 .asset-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
+  gap: 24px;
 }
 
 .asset-grid .asset-card {
@@ -9,10 +9,17 @@
   min-width: 0;
   flex-direction: column;
   border: 1px solid var(--shell-border-color);
-  border-radius: 14px;
+  border-radius: 6px;
   background: var(--background-color);
-  box-shadow: 0 8px 24px rgb(15 23 42 / 6%);
   overflow: hidden;
+}
+
+.asset-grid .asset-card[hidden] {
+  display: none;
+}
+
+.asset-grid .asset-card:hover {
+  border-color: var(--link-color);
 }
 
 .asset-grid .asset-card-media {
@@ -77,4 +84,95 @@
   .asset-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
+
+.asset-grid .asset-card-tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--shell-border-color);
+  padding: 12px 20px;
+}
+
+.asset-grid .asset-card-tools button,
+.asset-grid .asset-preview-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  border: 1px solid var(--shell-border-color);
+  border-radius: 4px;
+  background: white;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.asset-grid .asset-preview-button {
+  padding: 8px 18px;
+  font-size: var(--body-font-size-s);
+  font-weight: 600;
+}
+
+.asset-grid .asset-save,
+.asset-grid .asset-preview-close {
+  width: 44px;
+  padding: 10px;
+}
+
+.asset-grid .asset-card-tools img,
+.asset-grid .asset-preview-close img,
+.asset-grid .asset-original img {
+  width: 20px;
+  height: 20px;
+}
+
+.asset-grid .asset-save[aria-pressed='true'] {
+  border-color: #ca8a04;
+  background: #fef3c7;
+}
+
+.asset-grid .asset-preview {
+  position: fixed;
+  box-sizing: border-box;
+  width: min(760px, calc(100% - 32px));
+  max-height: calc(100dvh - 48px);
+  border: 1px solid var(--shell-border-color);
+  border-radius: 8px;
+  padding: 24px;
+  color: var(--text-color);
+  overflow-y: auto;
+}
+
+.asset-grid .asset-preview::backdrop {
+  background: rgb(18 22 28 / 70%);
+}
+
+.asset-grid .asset-preview-close {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  float: right;
+  margin-bottom: 12px;
+}
+
+.asset-grid .asset-preview-image {
+  display: block;
+  width: 100%;
+  max-height: 440px;
+  aspect-ratio: 16 / 10;
+  background: var(--light-color);
+  object-fit: contain;
+}
+
+.asset-grid .asset-original {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0;
+  font-weight: 600;
+}
+
+.asset-grid .asset-original[hidden] {
+  display: none;
 }
