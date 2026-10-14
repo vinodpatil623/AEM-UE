@@ -177,10 +177,19 @@ export default async function decorate(block) {
     });
   }
 
+  const ref = new URLSearchParams(window.location.search).get('ref');
   nav.querySelectorAll('a[href]').forEach((link) => {
-    const linkPath = new URL(link.href, window.location).pathname.replace(/\.html$/, '') || '/';
+    const destination = new URL(link.href, window.location);
+    if (ref && destination.origin === window.location.origin
+      && destination.pathname.startsWith('/content/aem-ue/')
+      && !destination.searchParams.has('ref')) {
+      destination.searchParams.set('ref', ref);
+      link.href = destination.href;
+    }
+    const linkPath = destination.pathname.replace(/\.html$/, '') || '/';
     const currentPath = window.location.pathname.replace(/\.html$/, '') || '/';
-    if (linkPath === currentPath) {
+    if (linkPath === currentPath
+      && (!destination.hash || destination.hash === window.location.hash)) {
       link.classList.add('active');
       link.setAttribute('aria-current', 'page');
     }
