@@ -17,6 +17,7 @@ export default function decorate(block) {
     const answerId = `faq-answer-${index + 1}`;
     question.classList.add('faq-question');
     question.setAttribute('role', 'button');
+    question.setAttribute('aria-label', question.textContent.trim());
     question.setAttribute('tabindex', '0');
     question.setAttribute('aria-controls', answerId);
 
