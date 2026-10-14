@@ -1,14 +1,15 @@
 .stats {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
+  gap: 0;
+  border-top: 1px solid var(--shell-border-color);
+  border-bottom: 1px solid var(--shell-border-color);
 }
 
 .stats .stats-item {
   padding: 24px;
-  border-radius: 12px;
-  background-color: var(--light-color);
-  text-align: center;
+  background-color: var(--background-color);
+  text-align: left;
 }
 
 .stats .stats-value {
