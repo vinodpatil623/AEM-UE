@@ -142,6 +142,27 @@ export default async function decorate(block) {
     brandLink.closest('.button-container').className = '';
   }
 
+  const searchIcon = nav.querySelector('.icon-search');
+  if (searchIcon && !searchIcon.closest('a, button')) {
+    const search = document.createElement('button');
+    search.type = 'button';
+    search.className = 'nav-search';
+    search.setAttribute('aria-label', 'Search assets');
+    search.title = 'Search assets';
+    searchIcon.replaceWith(search);
+    search.append(searchIcon);
+    search.addEventListener('click', () => {
+      const input = document.querySelector('.asset-search input[type="search"]');
+      input?.scrollIntoView({ block: 'center' });
+      input?.focus();
+    });
+    const toolSection = search.closest('.section');
+    if (toolSection && !toolSection.querySelector('a')) {
+      toolSection.classList.remove('nav-sections');
+      toolSection.classList.add('nav-tools');
+    }
+  }
+
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
