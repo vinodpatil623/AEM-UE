@@ -13,35 +13,35 @@
 :root {
   /* colors */
   --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
-  --shell-border-color: #e2e8f0;
-  --sidebar-background-color: #0f172a;
-  --sidebar-text-color: #e2e8f0;
+  --light-color: #f4f7f6;
+  --dark-color: #52615f;
+  --text-color: #20302d;
+  --link-color: #006f64;
+  --link-hover-color: #004e46;
+  --shell-border-color: #dce4e1;
+  --sidebar-background-color: #202b29;
+  --sidebar-text-color: #edf3f1;
 
   /* fonts */
   --body-font-family: roboto, roboto-fallback, sans-serif;
   --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
 
   /* body sizes */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 19px;
-  --body-font-size-xs: 17px;
+  --body-font-size-m: 16px;
+  --body-font-size-s: 14px;
+  --body-font-size-xs: 12px;
 
   /* heading sizes */
-  --heading-font-size-xxl: 55px;
-  --heading-font-size-xl: 44px;
-  --heading-font-size-l: 34px;
-  --heading-font-size-m: 27px;
-  --heading-font-size-s: 24px;
-  --heading-font-size-xs: 22px;
+  --heading-font-size-xxl: 36px;
+  --heading-font-size-xl: 28px;
+  --heading-font-size-l: 24px;
+  --heading-font-size-m: 22px;
+  --heading-font-size-s: 20px;
+  --heading-font-size-xs: 18px;
 
   /* nav height */
   --nav-height: 64px;
-  --sidebar-width: 264px;
+  --sidebar-width: 232px;
 }
 
 /* fallback fonts */
@@ -60,13 +60,13 @@
 @media (width >= 900px) {
   :root {
     /* body sizes */
-    --body-font-size-m: 18px;
+    --body-font-size-m: 16px;
     --body-font-size-s: 16px;
     --body-font-size-xs: 14px;
 
     /* heading sizes */
-    --heading-font-size-xxl: 45px;
-    --heading-font-size-xl: 36px;
+    --heading-font-size-xxl: 36px;
+    --heading-font-size-xl: 28px;
     --heading-font-size-l: 28px;
     --heading-font-size-m: 22px;
     --heading-font-size-s: 20px;
@@ -357,4 +357,42 @@ main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
+}
+
+html {
+  scroll-padding-top: calc(var(--nav-height) + 24px);
+}
+
+:focus-visible {
+  outline: 3px solid #007f73;
+  outline-offset: 4px;
+}
+
+body:has(.site-sidebar) header nav .nav-hamburger {
+  visibility: hidden;
+}
+
+body:has(.site-sidebar) main {
+  padding: 32px 0;
+}
+
+body:has(.site-sidebar) main > .section {
+  margin: 0 0 40px;
+}
+
+body:has(.site-sidebar) main > .section:empty {
+  margin: 0;
+  padding: 0;
+}
+
+body:has(.site-sidebar) main h1 {
+  margin-top: 0;
+}
+
+body:has(.site-sidebar) main > .section > div {
+  max-width: 1320px;
+}
+
+body:has(.site-sidebar) .asset-search-wrapper {
+  margin-bottom: 8px;
 }
